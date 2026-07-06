@@ -6,7 +6,7 @@ class Solution {
 
         if(cache.containsKey(i)) return cache.get(i);
 
-        cache.put(i, Math.max(nums[i] + dp(i - 2, nums, cache), dp(i - 1, nums, cache)));
+        cache.put(i, Math.max(dp(i - 1, nums, cache),nums[i] + dp(i - 2, nums, cache)));
         
         return cache.get(i);
     }
