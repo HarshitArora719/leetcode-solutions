@@ -1,7 +1,6 @@
 class Solution {
     public int findCircleNum(int[][] isConnected) {
         int n = isConnected.length;
-        int totalNoOfProvinces = 0;
         DSU dsu = new DSU(n);
 
         //making provinces(groups) using dsu
@@ -12,23 +11,19 @@ class Solution {
                 }
             }
         }
-
-        //counting groups(number of provinces)
-        for(int i = 0; i < n ; i++){
-            if(dsu.parent[i]==i) totalNoOfProvinces++;
-        }
-
-        return totalNoOfProvinces;
+        //every union decreases no. of provinces as initally they are n
+        return dsu.provinces;
     }
 
     class DSU{
         int[] parent;
         int[] size;
-
+        int provinces;
 
         DSU(int n){
             parent = new int[n];
             size = new int[n];
+            provinces = n;
 
             for(int i = 0; i < n; i++){
                 parent[i] = i;
@@ -59,6 +54,7 @@ class Solution {
                 parent[parentB] = parentA;
                 size[parentA] += size[parentB];
             }
+            provinces--;
         }
     }
 }
